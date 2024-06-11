@@ -12,12 +12,12 @@ ESP32MCPWMTimer::ESP32MCPWMTimer(uint8_t MCPWMTimerIndex, ESP32MCPWM* p){
 
 void ESP32MCPWMTimer::begin(uint32_t freq, bool isComplemented){
 	phaseComplement = isComplemented;
-    frequency = freq;
-    cmpr_a = 0;
-    cmpr_b = 0;
-    counter_mode = MCPWM_UP_COUNTER;
-    duty_mode = MCPWM_DUTY_MODE_0;
-    mcpwm_init(parent->getUnitIndex(), timerIndex, (mcpwm_config_t*)this);
+	frequency = freq;
+	cmpr_a = 0;
+	cmpr_b = 0;
+	counter_mode = MCPWM_UP_COUNTER;
+	duty_mode = MCPWM_DUTY_MODE_0;
+	mcpwm_init(parent->getUnitIndex(), timerIndex, (mcpwm_config_t*)this);
 	setDutyMode(MCPWM_DUTY_MODE_0);
 }
 
@@ -30,8 +30,8 @@ void ESP32MCPWMTimer::stop(){
 }
 
 bool ESP32MCPWMTimer::setFrequency(uint32_t freq){
-    frequency = freq; 
-    mcpwm_init(parent->getUnitIndex(), timerIndex, (mcpwm_config_t*)this);
+	frequency = freq; 
+	mcpwm_init(parent->getUnitIndex(), timerIndex, (mcpwm_config_t*)this);
 	return true;
 }
 
@@ -71,7 +71,7 @@ bool ESP32MCPWMTimer::setDutyCycleInUs(uint32_t dutyInUs){
 
 
 bool ESP32MCPWMTimer::setDutyMode(mcpwm_duty_type_t mode){
-    duty_mode = mode;
+	duty_mode = mode;
 	mcpwm_duty_type_t phaseAMode = mode;
 	mcpwm_duty_type_t phaseBMode = mode;
 	if(phaseComplement){
@@ -100,7 +100,7 @@ bool ESP32MCPWMTimer::setDutyMode(mcpwm_duty_type_t mode){
 }
 
 bool ESP32MCPWMTimer::setCounterMode(mcpwm_counter_type_t mode){
-    counter_mode = mode;
+	counter_mode = mode;
 	return true;
 }
 
