@@ -8,6 +8,8 @@
 	#error "this library is only for ESP32"
 #endif
 
+#define KHz *1000
+#define MHz *(1000 KHz)
 class ESP32MCPWM;
 class ESP32MCPWMTimer : private mcpwm_config_t{
 public:
@@ -40,6 +42,7 @@ private:
 class ESP32MCPWM {
 public:
 	ESP32MCPWM(uint8_t unit);
+	void setGroupResolution(uint32_t resolution);
 	inline mcpwm_unit_t getUnitIndex(){ return unitIndex; };
 	inline ESP32MCPWMTimer& getTimer(uint8_t timerIndex) { return timer[timerIndex%3]; };
 private:

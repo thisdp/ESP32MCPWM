@@ -149,8 +149,13 @@ bool ESP32MCPWMTimer::attachCapturePin(int8_t pin){
 
 bool ESP32MCPWMTimer::setResolution(uint32_t resolution){
 	mcpwm_timer_set_resolution(parent->getUnitIndex(),timerIndex,resolution);
+	setFrequency(frequency);
 }
 
 ESP32MCPWM::ESP32MCPWM(uint8_t unit){
 	unitIndex = (mcpwm_unit_t)unit;
+}
+
+void ESP32MCPWM::setGroupResolution(uint32_t resolution){
+	mcpwm_group_set_resolution(getUnitIndex(),resolution);
 }
