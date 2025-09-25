@@ -92,6 +92,8 @@ bool ESP32MCPWMTimer::setDutyMode(mcpwm_duty_type_t mode){
 			phaseAMode = MCPWM_HAL_GENERATOR_MODE_FORCE_HIGH;
 			phaseBMode = MCPWM_HAL_GENERATOR_MODE_FORCE_LOW;
 		break;
+		default: //Do not process
+		break;
 		}
 	}
 	mcpwm_set_duty_type(parent->getUnitIndex(), timerIndex, (mcpwm_generator_t)0,phaseAMode);
@@ -127,7 +129,6 @@ bool ESP32MCPWMTimer::resetDeadTime(){
 bool ESP32MCPWMTimer::attachPin(int8_t pin, uint8_t phase){
 	if(phase >=2) return false;
 	int8_t channelPhase = timerIndex*2+phase%2;
-	mcpwm_unit_t nUnit = parent->getUnitIndex();
 	mcpwm_gpio_init(parent->getUnitIndex(), (mcpwm_io_signals_t)channelPhase, pin);
 	return true;
 }
@@ -150,6 +151,7 @@ bool ESP32MCPWMTimer::attachCapturePin(int8_t pin){
 bool ESP32MCPWMTimer::setResolution(uint32_t resolution){
 	mcpwm_timer_set_resolution(parent->getUnitIndex(),timerIndex,resolution);
 	setFrequency(frequency);
+	return true;
 }
 
 ESP32MCPWM::ESP32MCPWM(uint8_t unit){
